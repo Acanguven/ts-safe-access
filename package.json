@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "./plugin.js",
   "license": "MIT",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "prepublish": "yarn build"
+  },
   "dependencies": {
     "typescript": "^3.3.4000"
   },
