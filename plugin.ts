@@ -1,6 +1,10 @@
 import * as ts from 'typescript';
 import {SyntaxKind} from 'typescript';
 
+/**
+ * Detects if node is safe access parent
+ * @param node
+ */
 const isSafeAccessParent = (node: ts.Node): boolean => {
   // by default ? is for conditional expressions
   return node.kind === SyntaxKind.ConditionalExpression &&
@@ -24,6 +28,10 @@ const isSafeAccessParent = (node: ts.Node): boolean => {
     })
 };
 
+/**
+ * Checks wheter node is valid conditional expression with ternary
+ * @param node
+ */
 const isValidConditionalExpression = (node: ts.Node) => {
   return node.getChildren().some((child: ts.Node, i: number) => {
     const secondNextNode = node.getChildAt(i + 2);
@@ -33,12 +41,15 @@ const isValidConditionalExpression = (node: ts.Node) => {
 };
 
 
+/**
+ * Converts conditional expression to safe access
+ * @param node
+ */
 const convertConditionalToSafeAccess = (node: ts.Node) => {
   const accessList = node
     .getFullText()
     .split('?')
     .map(str => str.split('.').filter(c => c.length > 0))
-  // .map(str => ({prop: str, node: listToAccessNode(str)}));
 
   let securedAccess = ts.createPropertyAccess(
     createSafeParenthesisNode(listToAccessNode(accessList[0])),
@@ -59,6 +70,10 @@ const convertConditionalToSafeAccess = (node: ts.Node) => {
   return securedAccess;
 };
 
+/**
+ * Creates conditional operator with empty object
+ * @param node
+ */
 const createSafeParenthesisNode = (node: ts.PropertyAccessExpression | ts.Identifier | ts.ParenthesizedExpression) => {
   return ts.createParen(
     ts.createBinary(
@@ -70,6 +85,10 @@ const createSafeParenthesisNode = (node: ts.PropertyAccessExpression | ts.Identi
 };
 
 
+/**
+ * Converts list of props to object property accessors
+ * @param accessList
+ */
 const listToAccessNode = (accessList: string[]) => {
   if (accessList.length < 2) return ts.createIdentifier(accessList[0]);
 
@@ -90,6 +109,9 @@ const listToAccessNode = (accessList: string[]) => {
   return propertyAccessor;
 };
 
+/**
+ * Plugin base
+ */
 function safeAccessor<T extends ts.Node>(): ts.TransformerFactory<T> {
   return (context) => {
     const visit: ts.Visitor = (node) => {
