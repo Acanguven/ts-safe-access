@@ -1,5 +1,4 @@
-import * as ts from 'typescript';
-import {SyntaxKind} from 'typescript';
+import ts, {SyntaxKind} from 'typescript';
 
 /**
  * Detects if node is safe access parent
