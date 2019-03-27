@@ -37,3 +37,5 @@ npm i ts-safe-access --save --dev
 ### Usage
 
 Transform plugins are not directly supported yet, create a custom compiler with TS api and connect the plugin.
+
+An example can be found [here](./test.ts)
