@@ -5,7 +5,7 @@ Hacky way to implement elvis operator (aka safe navigation) with typescript plug
 
 ## Source
 
-```ts
+```js
 console.log(a.test?.way?.dd.cc?.uu);
 console.log(ac?.test?.test2);
 console.log(ac?.test[3]?.test2);
