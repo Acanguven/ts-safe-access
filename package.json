@@ -1,0 +1,12 @@
+{
+  "name": "ts-safe-access",
+  "version": "1.0.0",
+  "main": "./plugin.js",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^3.3.4000"
+  },
+  "devDependencies": {
+    "ts-node": "^8.0.3"
+  }
+}
