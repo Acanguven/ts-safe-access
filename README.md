@@ -44,7 +44,9 @@ npm i ts-safe-access --save --dev
 
 ### Usage
 
+```bash
 ttsc <input_file_name>.ts
+```
 
 Module transpiler example can be found [here](test/module-transpiler.ts)
 
