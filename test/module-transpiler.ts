@@ -1,5 +1,5 @@
 import * as ts from 'typescript';
-import safeAccessor from "./plugin";
+import {safeAccessor} from "../src/plugin";
 
 const source = `
 console.log(a.test?.way?.dd.cc?.uu);

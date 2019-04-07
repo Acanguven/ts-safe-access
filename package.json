@@ -1,8 +1,11 @@
 {
   "name": "ts-safe-access",
   "version": "1.0.0",
-  "main": "./plugin.js",
+  "main": "src/plugin.js",
   "license": "MIT",
+  "bin": {
+    "ttsc": ".bin/ttsc"
+  },
   "scripts": {
     "build": "./node_modules/.bin/tsc",
     "prepublish": "yarn build"
@@ -11,6 +14,6 @@
     "typescript": "^3.3.4000"
   },
   "devDependencies": {
-    "ts-node": "^8.0.3"
+    "@types/node": "^11.13.0"
   }
 }
