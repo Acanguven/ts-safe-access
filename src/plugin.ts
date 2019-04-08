@@ -1,4 +1,5 @@
-import ts, {SyntaxKind} from 'typescript';
+import {SyntaxKind} from 'typescript';
+import * as ts from 'typescript';
 
 /**
  * Detects if node is safe access parent
@@ -48,7 +49,7 @@ const convertConditionalToSafeAccess = (node: ts.Node) => {
   const accessList = node
     .getFullText()
     .split('?')
-    .map(str => str.split('.').filter(c => c.length > 0))
+    .map(str => str.split('.').filter(c => c.length > 0));
 
   let securedAccess = ts.createPropertyAccess(
     createSafeParenthesisNode(listToAccessNode(accessList[0])),
@@ -111,7 +112,7 @@ const listToAccessNode = (accessList: string[]) => {
 /**
  * Plugin base
  */
-function safeAccessor<T extends ts.Node>(): ts.TransformerFactory<T> {
+export function safeAccessor<T extends ts.SourceFile>(): ts.TransformerFactory<T> {
   return (context) => {
     const visit: ts.Visitor = (node) => {
 
@@ -125,5 +126,3 @@ function safeAccessor<T extends ts.Node>(): ts.TransformerFactory<T> {
     return (node) => ts.visitNode(node, visit);
   };
 }
-
-export = safeAccessor;

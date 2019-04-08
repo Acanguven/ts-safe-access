@@ -2,8 +2,16 @@
 
 Hacky way to implement elvis operator (aka safe navigation) with typescript plugin.
 
+## Module Transpiler
+If you want to just get the corresponding JavaScript output given TypeScript sources. 
+For this you can use ts.transpileModule to get a string => string transformation like below.
 
-## Source
+## Custom Compiler
+If you want get custom compiler only in addition to native tsc that's run custom transformer before compilation.
+Custom compiler that will take a list of TypeScript files and compile 
+down to their corresponding JavaScript files.
+
+### Source
 
 ```js
 console.log(a.test?.way?.dd.cc?.uu);
@@ -14,7 +22,7 @@ console.log(a.test?a.c?4:32:3)
 ```
 
 
-## Compiled
+### Compiled
 
 ```js
 console.log((((a.test || {}).way || {}).dd.cc || {}).uu);
@@ -36,6 +44,11 @@ npm i ts-safe-access --save --dev
 
 ### Usage
 
-Transform plugins are not directly supported yet, create a custom compiler with TS api and connect the plugin.
+```bash
+ttsc <input_file_name>.ts
+```
 
-An example can be found [here](./test.ts)
+Module transpiler example can be found [here](test/module-transpiler.ts)
+
+Custom compiler example can be found [here](src/custom-compiler.ts)
+
